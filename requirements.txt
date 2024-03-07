@@ -1,7 +1,6 @@
 fastdtw==0.3.4
 firebase_admin==6.1.0
 mediapipe==0.10.11
-mediapipe_silicon==0.8.11
 numpy==1.24.1
 opencv_contrib_python==4.7.0.68
 pandas==1.5.3
