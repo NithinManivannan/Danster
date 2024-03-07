@@ -7,4 +7,4 @@ opencv_contrib_python==4.7.0.68
 pandas==1.5.3
 pyshine==0.0.9
 scipy==1.10.0
-streamlit=1.31.1
+streamlit==1.31.1
