@@ -156,7 +156,7 @@ def main(fileAddress):
         cv2.putText(img, "Dance Pose Analysis:", (70, 50), cv2.FONT_HERSHEY_PLAIN, 3,
                     (255, 0, 0), 3)
 
-        cv2.imshow("Image", img)
+        # cv2.imshow("Image", img)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
