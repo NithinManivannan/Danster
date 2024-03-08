@@ -23,7 +23,7 @@ def calculate_dance_score(ref1_path, ref2_path):
 
 if __name__ == "__main__":
     # Example usage
-    ref1 = "Assets/RobotDance.mov"
+    ref1 = "Assets/RobotDance.mp4"
     ref2 = "Assets/DanceTest.mp4"
     score = calculate_dance_score(ref1, ref2)
     print(f"Dance Score: {score}")
