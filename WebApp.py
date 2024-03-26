@@ -1,5 +1,14 @@
 import streamlit as st
 from Compare import calculate_dance_score
+import os
+
+# Log the current working directory
+st.write(f"Current Working Directory: {os.getcwd()}")
+
+# List files in the expected directory
+expected_directory = 'Assets'  # Adjust if your path is different
+files_in_directory = os.listdir(expected_directory)
+st.write(f"Files in {expected_directory}: {files_in_directory}")
 
 st.title("Dance Pose Analysis")
 
