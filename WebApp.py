@@ -8,6 +8,7 @@ st.write(f"Current Working Directory: {os.getcwd()}")
 # List files in the expected directory
 expected_directory = 'Assets'  # Adjust if your path is different
 files_in_directory = os.listdir(expected_directory)
+st.write(f"All directories and files at {os.getcwd()}: {os.listdir()}")
 st.write(f"Files in {expected_directory}: {files_in_directory}")
 
 st.title("Dance Pose Analysis")
