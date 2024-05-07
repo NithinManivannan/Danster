@@ -1,6 +1,6 @@
 import streamlit as st
-import os
 from Compare import calculate_dance_score
+import os
 
 # Determine the base path depending on the environment
 if 'RENDER' in os.environ:
@@ -19,13 +19,16 @@ else:
     st.success(f"Assets directory is found at: {assets_path}")
 
 # List files in the Assets directory
-files_in_directory = os.listdir(assets_path)
-st.write(f"Files in Assets directory: {files_in_directory}")
+if os.path.exists(assets_path):
+    files_in_directory = os.listdir(assets_path)
+    st.write(f"Files in Assets directory: {files_in_directory}")
+else:
+    files_in_directory = []
 
 st.title("Dance Pose Analysis")
 
-# Assuming a fixed reference video within the Assets directory
-ref_video = os.path.join(assets_path, "RobotDance.mp4")
+# Upload reference video (adjusted to use the correct path)
+ref_video = os.path.join(assets_path, "RobotDance.mp4")  # Ensure this file is in your Assets directory
 
 uploaded_file = st.file_uploader("Upload your dance video", type=['mp4', 'mov', 'avi'])
 if uploaded_file is not None:
@@ -34,9 +37,12 @@ if uploaded_file is not None:
         f.write(uploaded_file.getbuffer())  # Save the uploaded file to disk
 
     # Calculate the dance score using the saved file and the reference video
-    dance_score = calculate_dance_score(ref_video, temp_video_path)
-    st.write(f"Dance Score: {dance_score}")
-    st.video(temp_video_path)
+    if os.path.exists(ref_video):
+        dance_score = calculate_dance_score(ref_video, temp_video_path)
+        st.write(f"Dance Score: {dance_score}")
+        st.video(temp_video_path)
+    else:
+        st.error("Reference video file not found. Please check your Assets directory.")
 
     # Optionally, clean up by removing the temporary video file
     os.remove(temp_video_path)
