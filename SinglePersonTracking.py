@@ -5,7 +5,6 @@ from datetime import datetime
 import cv2
 import mediapipe as mp
 
-
 class poseDetector():
 
     #Instaniating variables
@@ -100,30 +99,14 @@ class poseDetector():
 
 
 def main(fileAddress):
-    # cap = cv2.VideoCapture(0) # - overloaded
 
     cap = cv2.VideoCapture(fileAddress)
-
-    # get the duration in seconds
-    # frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-    # fps = cap.get(cv2.CAP_PROP_FPS)
-    # try:
-    #     duration = round(frames / fps)
-    # except ZeroDivisionError:
-    #     pass
-    # video_time = datetime.timedelta(seconds=duration)
-
-    # pTime = 0
-    # start_time = time.time()
 
     detector = poseDetector()
 
     absList = []
 
     while True:
-        # seconds_passed = time.time() - start_time
-        # if seconds_passed > duration:
-        #     break
 
         success, img = cap.read()
         if not success:
@@ -140,35 +123,16 @@ def main(fileAddress):
         for i in range(len(lmList)):
             print(lmList[i])
 
-        # if len(lmList) != 0:
-        # print(lmList[14])
-        # cv2.circle(img, (lmList[14][1], lmList[14][2]), 15, (0, 0, 255), cv2.FILLED)
-
-        # cTime = time.time()
-        # fps = 1 / (cTime - pTime)
-        # pTime = cTime
-
-        # cv2.putText(img, str(int(fps)), (70, 50), cv2.FONT_HERSHEY_PLAIN, 3,
-        #           (255, 0, 0), 3)
-
         img = cv2.flip(img, 1)
 
         cv2.putText(img, "Dance Pose Analysis:", (70, 50), cv2.FONT_HERSHEY_PLAIN, 3,
                     (255, 0, 0), 3)
 
-        # cv2.imshow("Image", img)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
-        # cv2.waitKey(0)
-        # break
-
     return absList
-
-
-# if __name__ == "__main__":
-#     main()
 
 
 def calcAngle(f, absList, n1, n2, n3):
@@ -218,6 +182,3 @@ def getAngleList(fileAddress):
     print('\n\n\n Printing AbsList!! --------------')
     print(absList)
     return createAngleList(absList)
-
-# print('\n\n\nFinal Print!!')
-# print(getAngleList("./Assets/Q9J9xyGC.mov"))
