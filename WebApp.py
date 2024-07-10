@@ -33,6 +33,14 @@ if uploaded_file is not None:
     user_video_url = upload_to_firebase(uploaded_file, uploaded_file.name, uploaded_file.type)
     st.video(user_video_url)
 
-    # Calculate the dance score using URLs directly
-    dance_score = calculate_dance_score(robot_dance_video_url, user_video_url)
+    # Assume you can obtain FPS from somewhere, or use a default value
+    fps = 30  # This should be dynamically obtained or set accurately if known
+    dance_score, flagged_timestamps = calculate_dance_score(robot_dance_video_url, user_video_url, fps)
+
     st.write(f"Dance Score: {dance_score}")
+    if flagged_timestamps:
+        st.write("Mismatches found at the following seconds:")
+        for ts in flagged_timestamps:
+            st.write(f"{ts} seconds")
+    else:
+        st.write("No significant mismatches detected.")

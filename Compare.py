@@ -6,7 +6,7 @@ from fastdtw import fastdtw
 from SinglePersonTracking import getAngleList
 from PercentError import compare_angle_lists
 
-def calculate_dance_score(ref1_path, ref2_path):
+def calculate_dance_score(ref1_path, ref2_path,fps=30):
     # Step 1: Get angle lists for Input A and Input B
     list1 = getAngleList(ref1_path)
     list2 = getAngleList(ref2_path)
@@ -15,11 +15,11 @@ def calculate_dance_score(ref1_path, ref2_path):
     distance, path = fastdtw(np.array(list1), np.array(list2), dist=euclidean)
 
     # Step 3: Use Path to get aggregate Percent Error Difference per frame
-    result = compare_angle_lists(list1, list2, path)
+    result = compare_angle_lists(list1, list2, path, fps)
     percentErrorList, flaggedTimeStamps, danceScore = result
 
     # Assuming danceScore is the value you want to return
-    return abs(100 - round(danceScore, 2))
+    return abs(100 - round(danceScore, 2)), flaggedTimeStamps
 
 if __name__ == "__main__":
     # Example usage
